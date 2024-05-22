@@ -78,7 +78,7 @@ public class Pendu extends Application {
      */    
     private Button boutonMaison;
     /**
-     * le bouton qui permet de (lancer ou relancer une partie
+     * le bouton qui permet de (lancer ou relancer une partie)
      */ 
     private Button bJouer;
 
@@ -106,9 +106,18 @@ public class Pendu extends Application {
     /**
      * @return le panel contenant le titre du jeu
      */
-    private Pane titre(){
-        // A implementer          
-        Pane banniere = new Pane();
+    private Pane titre(){            
+        HBox banniere = new HBox();
+        banniere.setBackground(new Background(new BackgroundFill(Color.GREY,null,null)));
+        banniere.setPadding(new Insets(10));   
+        Text titre = new Text("Jeu du Pendu");
+        this.boutonMaison = new Button();
+        boutonMaison.setAlignment(Pos.CENTER_RIGHT);
+        boutonMaison.setGraphic(new ImageView(new Image("file:img/home.png")));    
+        this.boutonParametres = new Button("Paramètres");
+        boutonParametres.setAlignment(Pos.CENTER_RIGHT);
+        boutonParametres.setGraphic(new ImageView(new Image("file:img/parametres.png")));       
+        banniere.getChildren().addAll(titre,boutonMaison,boutonParametres);      
         return banniere;
     }
 
