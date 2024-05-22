@@ -107,22 +107,39 @@ public class Pendu extends Application {
      * @return le panel contenant le titre du jeu
      */
     private Pane titre(){            
+        BorderPane fenetre = new BorderPane(); 
+        fenetre.setBackground(new Background(new BackgroundFill(Color.GREY,null,null)));
         HBox banniere = new HBox();
-        banniere.setBackground(new Background(new BackgroundFill(Color.GREY,null,null)));
         banniere.setPadding(new Insets(10));   
         Text titre = new Text("Jeu du Pendu");
+        titre.setFont(Font.font("Verdana", 40));
+
         this.boutonMaison = new Button();
         boutonMaison.setAlignment(Pos.CENTER_RIGHT);
-        boutonMaison.setGraphic(new ImageView(new Image("file:img/home.png")));    
-        this.boutonParametres = new Button("Paramètres");
+        ImageView imgMaison = new ImageView(new Image("file:img/home.png"));
+        imgMaison.setFitHeight(30); 
+        imgMaison.setFitWidth(30); 
+        boutonMaison.setGraphic(imgMaison);
+    
+        this.boutonParametres = new Button();
         boutonParametres.setAlignment(Pos.CENTER_RIGHT);
-        ImageView img = new ImageView(new Image("file:img/parametres.png"))
-        img.setFitHeight(30);
-        img.setFitWidth(30);
-        boutonParametres.setGraphic(img);       
-        boutonParametres.setGraphic();       
-        banniere.getChildren().addAll(titre,boutonMaison,boutonParametres);      
-        return banniere;
+        ImageView imgParam = new ImageView(new Image("file:img/parametres.png"));
+        imgParam.setFitHeight(30);
+        imgParam.setFitWidth(30);
+        boutonParametres.setGraphic(imgParam); 
+        
+        this.boutonInfo = new Button();
+        boutonInfo.setAlignment(Pos.CENTER_RIGHT);
+        ImageView imgInfo = new ImageView(new Image("file:img/info.png"));
+        imgInfo.setFitHeight(30);
+        imgInfo.setFitWidth(30);
+        boutonParametres.setGraphic(imgInfo);
+        
+        banniere.getChildren().addAll(titre,boutonMaison,boutonParametres,boutonInfo);    
+
+        fenetre.setLeft(titre);  
+        fenetre.setRight(banniere); 
+        return fenetre;
     }
 
     // /**
