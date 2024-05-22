@@ -116,7 +116,11 @@ public class Pendu extends Application {
         boutonMaison.setGraphic(new ImageView(new Image("file:img/home.png")));    
         this.boutonParametres = new Button("Paramètres");
         boutonParametres.setAlignment(Pos.CENTER_RIGHT);
-        boutonParametres.setGraphic(new ImageView(new Image("file:img/parametres.png")));       
+        ImageView img = new ImageView(new Image("file:img/parametres.png"))
+        img.setFitHeight(30);
+        img.setFitWidth(30);
+        boutonParametres.setGraphic(img);       
+        boutonParametres.setGraphic();       
         banniere.getChildren().addAll(titre,boutonMaison,boutonParametres);      
         return banniere;
     }
