@@ -10,13 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.control.Tooltip;
-import javafx.scene.control.TitledPane;
-import javafx.scene.layout.Region;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar.ButtonData ;
-import javafx.scene.control.ButtonType ;
+
 import java.util.List;
 import java.util.Arrays;
 import java.io.File;
@@ -70,6 +66,10 @@ public class Pendu extends Application {
      */
     private BorderPane panelCentral;
     /**
+     * le bouton qui permet d'obtenir des informations'
+     */ 
+    private Button boutonInfo;
+    /**
      * le bouton Paramètre / Engrenage
      */
     private Button boutonParametres;
@@ -78,9 +78,25 @@ public class Pendu extends Application {
      */    
     private Button boutonMaison;
     /**
-     * le bouton qui permet de (lancer ou relancer une partie)
+     * le bouton qui permet de (lancer ou relancer une partie
      */ 
     private Button bJouer;
+    /**
+     * le bouton radio qui met le jeu en mode Facile
+     */
+    private RadioButton boutonFacile;
+    /**
+     * le bouton radio qui met le jeu en mode Moyen
+     */ 
+    private RadioButton boutonMedium;
+    /**
+     * le bouton radio qui met le jeu en mode Difficile
+     */ 
+    private RadioButton boutonDifficile;
+    /**
+     * le bouton radio qui met le jeu en mode Expert
+     */ 
+    private RadioButton boutonExpert;
 
     /**
      * initialise les attributs (créer le modèle, charge les images, crée le chrono ...)
@@ -99,19 +115,20 @@ public class Pendu extends Application {
     private Scene laScene(){
         BorderPane fenetre = new BorderPane();
         fenetre.setTop(this.titre());
-        fenetre.setCenter(this.panelCentral);
+        fenetre.setCenter(this.fenetreAccueil()); //this.panelCentral
         return new Scene(fenetre, 800, 1000);
     }
 
     /**
      * @return le panel contenant le titre du jeu
      */
-    private Pane titre(){            
+    private Pane titre(){       
         BorderPane fenetre = new BorderPane(); 
         fenetre.setBackground(new Background(new BackgroundFill(Color.GREY,null,null)));
         HBox banniere = new HBox();
         banniere.setPadding(new Insets(10));   
-        Text titre = new Text("Jeu du Pendu");
+        Label titre = new Label("Jeu du Pendu");
+        titre.setPadding(new Insets(30));
         titre.setFont(Font.font("Verdana", 40));
 
         this.boutonMaison = new Button();
@@ -133,13 +150,15 @@ public class Pendu extends Application {
         ImageView imgInfo = new ImageView(new Image("file:img/info.png"));
         imgInfo.setFitHeight(30);
         imgInfo.setFitWidth(30);
-        boutonParametres.setGraphic(imgInfo);
+        boutonInfo.setGraphic(imgInfo);
         
         banniere.getChildren().addAll(titre,boutonMaison,boutonParametres,boutonInfo);    
 
         fenetre.setLeft(titre);  
         fenetre.setRight(banniere); 
         return fenetre;
+            
+
     }
 
     // /**
@@ -164,7 +183,33 @@ public class Pendu extends Application {
      // * @return la fenêtre d'accueil sur laquelle on peut choisir les paramètres de jeu
      // */
     private Pane fenetreAccueil(){   
-        Pane res = new Pane();
+        VBox res = new VBox();
+        res.setPadding(new Insets(10));
+        this.bJouer = new Button(); 
+        this.bJouer.setText("Lancer une partie");  
+        this.bJouer.setPadding(new Insets(10)); 
+        //TitledPane tp = new TitledPane("Niveau de difficulté");
+        
+
+        ToggleGroup groupe = new ToggleGroup();
+
+        this.boutonFacile = new RadioButton(String.valueOf(MotMystere.FACILE));
+        this.boutonFacile.setText("Facile");    
+        this.boutonFacile.setToggleGroup(groupe); 
+
+        this.boutonMedium = new RadioButton(String.valueOf(MotMystere.MOYEN));
+        this.boutonMedium.setText("Moyen");
+        this.boutonMedium.setToggleGroup(groupe);
+
+        this.boutonDifficile = new RadioButton(String.valueOf(MotMystere.DIFFICILE));
+        this.boutonDifficile.setText("Difficile");
+        this.boutonDifficile.setToggleGroup(groupe);  
+
+        this.boutonExpert = new RadioButton(String.valueOf(MotMystere.EXPERT));
+        this.boutonExpert.setText("Expert");
+        this.boutonExpert.setToggleGroup(groupe);   
+
+        res.getChildren().addAll(this.bJouer,this.boutonFacile,this.boutonMedium,this.boutonDifficile,this.boutonExpert);    
         return res;
     }
 
