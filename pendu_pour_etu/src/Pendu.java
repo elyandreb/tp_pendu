@@ -330,7 +330,7 @@ public class Pendu extends Application {
      */
     public Chronometre getChrono(){
         // A implémenter
-        return null; // A enlever
+        return this.chrono;
     }
 
     public Alert popUpPartieEnCours(){
