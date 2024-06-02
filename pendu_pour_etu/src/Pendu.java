@@ -149,6 +149,7 @@ public class Pendu extends Application {
         this.boutonInfo = new Button();
         boutonInfo.setAlignment(Pos.CENTER_RIGHT);
         ImageView imgInfo = new ImageView(new Image("file:img/info.png"));
+        boutonInfo.setOnAction(new ControleurInfos(this));
         imgInfo.setFitHeight(30);
         imgInfo.setFitWidth(30);
         boutonInfo.setGraphic(imgInfo);
@@ -341,19 +342,34 @@ public class Pendu extends Application {
         
     public Alert popUpReglesDuJeu(){
         // A implementer
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "");
+        alert.setTitle("Règles du jeu");
+        alert.setHeaderText("Règles du jeu du pendu : ");
+        alert.setContentText("Voici les règles du jeu du Pendu:\n\n"
+        + "1. Un mot mystère est choisi au hasard et vous devez deviner ce mot en proposant des lettres une par une.\n"
+        + "2. Chaque fois que vous proposez une lettre, elle est soit révélée dans le mot si elle y figure, soit elle est marquée comme une erreur.\n"
+        + "3. Vous avez un nombre limité d'erreurs autorisées (10). Si vous dépassez ce nombre, vous perdez la partie.\n"
+        + "4. Le jeu se termine lorsque vous avez deviné toutes les lettres du mot mystère ou lorsque vous avez utilisé toutes vos chances.\n"
+        + "5. Vous pouvez choisir le niveau de difficulté avant de commencer la partie :\n"
+        + "   - FACILE : La première et la dernière lettre du mot sont révélées, ainsi que les caractères non alphabétiques.\n"
+        + "   - MEDIUM : La première lettre du mot est révélée, ainsi que les caractères non alphabétiques.\n"
+        + "   - DIFFICILE : Seuls les caractères non alphabétiques sont révélés.\n"
+        + "   - EXPERT : Aucune lettre n'est révélée.\n\n"
+        + "Bonne chance et amusez-vous bien !");
         return alert;
     }
     
     public Alert popUpMessageGagne(){
         // A implementer
-        Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez gagné");        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez gagné");   
+        alert.setTitle("Partie terminée");     
         return alert;
     }
     
     public Alert popUpMessagePerdu(){
         // A implementer    
         Alert alert = new Alert(Alert.AlertType.INFORMATION,"Vous avez perdu"+"le mot à trouver était "+this.modelePendu.getMotATrouve());
+        alert.setTitle("Partie terminée");
         return alert;
     }
 
