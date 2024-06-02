@@ -5,6 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.TilePane;
 import javafx.scene.shape.Circle ;
+import javafx.scene.shape.Ellipse;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -25,8 +27,25 @@ public class Clavier extends TilePane{
      * @param actionTouches le contrôleur des touches
      * @param tailleLigne nombre de touches par ligne
      */
-    public Clavier(String touches, EventHandler<ActionEvent> actionTouches) {
-        // A implémenter
+    public Clavier(String touches, EventHandler<ActionEvent> actionTouches, int tailleLigne){ 
+        this.clavier = new ArrayList<Button>();
+        this.setPrefColumns(tailleLigne);
+        this.setPrefRows((int) Math.ceil(touches.length()/tailleLigne));
+
+        for (int i = 0; i < touches.length(); i++){
+            Button b = new Button(touches.substring(i, i+1));
+            b.setOnAction(actionTouches);
+            this.getChildren().add(b);
+            this.clavier.add(b);
+        }
+        
+
+
+        
+
+        
+        
+        
     }
 
     /**
@@ -34,6 +53,12 @@ public class Clavier extends TilePane{
      * @param touchesDesactivees une chaine de caractères contenant la liste des touches désactivées
      */
     public void desactiveTouches(Set<String> touchesDesactivees){
-        // A implémenter
+        for (Button touche : clavier) {
+            if (touchesDesactivees.contains(touche.getText())) {
+                touche.setDisable(true);
+            } else {
+                touche.setDisable(false);
+            }
+        }
     }
 }
