@@ -31,6 +31,15 @@ public class Chronometre extends Text{
      */
     public Chronometre(){
         // A implémenter
+        super("0:0");
+        this.setFont(new Font("Arial", 24));
+        this.setTextAlignment(TextAlignment.CENTER);
+        
+        actionTemps = new ControleurChronometre(this);
+        keyFrame = new KeyFrame(Duration.seconds(1), actionTemps);
+
+        timeline = new Timeline(keyFrame);
+        timeline.setCycleCount(Animation.INDEFINITE);
     }
 
     /**
@@ -39,27 +48,32 @@ public class Chronometre extends Text{
      * @param tempsMillisec la durée depuis à afficher
      */
     public void setTime(long tempsMillisec){
-        // A implémenter
+        long seconds = tempsMillisec / 1000;
+        long minutes = seconds / 60;
+        seconds = seconds % 60;
+        this.setText(String.format("%d:%02d", minutes, seconds));
     }
 
     /**
      * Permet de démarrer le chronomètre
      */
     public void start(){
-        // A implémenter
+        timeline.play();
     }
 
     /**
      * Permet d'arrêter le chronomètre
      */
     public void stop(){
-        // A implémenter
+        timeline.stop();
     }
 
     /**
      * Permet de remettre le chronomètre à 0
      */
     public void resetTime(){
-        // A implémenter
+        timeline.stop();
+        actionTemps.reset();
+        setTime(0);
     }
 }
